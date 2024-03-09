@@ -1,17 +1,4 @@
-float sqrt(int x) {
-    int i;
-    float s;
-    if (x == 0) return x;
-    s=((x/2)+x/(x/2)) / 2;
-    for(i=1;i<=4;i++) {
-        s=(s+x/s)/2;
-    }
-    return s;
-}
-
-/*
-Seja uma classe que representa um ponto no plano dada por,.  
-*/
+float sqrt(int x);
 
 class ponto {
     float x; // abcissa
@@ -32,7 +19,6 @@ public:
      float dist (const ponto& p) {
             // determina a distância do ponto
             // à este passaso como argumeto.
-
             return sqrt((p.x - x)*(p.x - x) + (p.y - y)*(p.y - y));
         }
         float& X() {
@@ -49,29 +35,5 @@ public:
 
 };
 
-/* Implemente as funções a seguir usando a classe anterior */
-
-float reta(ponto& p, ponto& q) {
-    // retorna coeficiente angular da reta 
-    // que passa por p e 
-    return (q.Y() - p.Y()) / (q.X() - p.X());
-}
-
-float minDist(const ponto& p, ponto kust[], int n) {
-   // retorna a menor distância entre p e os // pontos da lista list dada de 
-   // comprimento n. 
-
-    float min = kust[0].dist(p);
-
-    for (int i = 0; i < n; i++)
-    {
-        float dis = kust[i].dist(p); 
-
-        if (dis < min)
-        {
-            min = dis;
-        }
-    }
-
-   return min;
-}
+float reta(ponto& p, ponto& q);
+float minDist(const ponto& p, ponto kust[], int n);
