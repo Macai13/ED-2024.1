@@ -1,4 +1,4 @@
-float sqrt(int x);
+#include <cmath>
 
 class ponto {
     float x; // abcissa

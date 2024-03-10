@@ -1,13 +1,4 @@
-float sqrt(int x) {
-    int i;
-    float s;
-    if (x == 0) return x;
-    s=((x/2)+x/(x/2)) / 2;
-    for(i=1;i<=4;i++) {
-        s=(s+x/s)/2;
-    }
-    return s;
-}
+#include <cmath>
 
 /*
 Seja uma classe que representa um ponto no plano dada por,.  
