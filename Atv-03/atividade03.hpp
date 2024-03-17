@@ -20,23 +20,9 @@ frac(int n=0, int d=1) {
        den = d;
    }
    // Operadores 
-   bool operator>(frac& frac) {
-        // configura operador >
-        if (((float)num / den) > ((float)frac.getNum() / frac.getDen()))
-        {
-            return true;
-        }
-
-        return false;
-   }
-   bool operator==(frac& frac) {
-        // configura operador ==
-        return false;
-   }
-   frac operator+(frac& frac) {
-        // soma
-        return frac;
-    }     
+   bool operator>(frac& frac);
+   bool operator==(frac& frac);
+   frac operator+(frac& frac);   
    int getNum() { return num; }    
    int getDen() { return den; } 
 };
