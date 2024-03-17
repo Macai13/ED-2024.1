@@ -1,3 +1,5 @@
 *.exe
 makefile
 .vscode
+
+fracoes.txt
