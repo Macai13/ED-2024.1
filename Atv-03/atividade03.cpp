@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 
 namespace aluno {
 
@@ -41,6 +42,10 @@ frac(int n=0, int d=1) {
    frac operator+(frac& fracc) {
         int x = fracc.getNum() * den + fracc.getDen() * num;
         int y = fracc.getDen() * den;
+
+        int _mdc = mdc(x, y);
+        x /= _mdc;
+        y /= _mdc;
 
         return frac(x, y);
     }     
@@ -115,7 +120,7 @@ frac sumFracs(frac fracs[], int n) {
 
     for (int i = 0; i < n; i++)
     {
-        sum.operator+(fracs[i]);
+        sum = sum.operator+(fracs[i]);
     }
 
     return sum;

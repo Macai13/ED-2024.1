@@ -13,5 +13,9 @@ int main()
         cout << fracs[i].getNum() << " / " << fracs[i].getDen() << endl;
     }
 
+    aluno::frac sum = aluno::sumFracs(fracs, 9);
+
+    cout << "sum: " << sum.getNum() << "/" << sum.getDen() << endl;
+
     return 0;
 }
