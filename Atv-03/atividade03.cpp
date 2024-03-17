@@ -122,13 +122,6 @@ frac sumFracs(frac fracs[], int n) {
 
 }
 
-void swap(frac& a, frac& b)
-{
-    frac r = a;
-    a = b;
-    b = r;
-}
-
 void sortFracs(frac fracs[], int n) {
     /*
        ordena vetor de drações de entrada. Note que um ponteiro do vetor real é passado como argumento. O tamanho passaso  do vetor é dado por n.   

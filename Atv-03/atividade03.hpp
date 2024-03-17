@@ -43,6 +43,5 @@ frac(int n=0, int d=1) {
 
 frac* loadFracs(char* fileFracs);
 frac sumFracs(frac fracs[], int n);
-void swap(frac &a, frac &b);
 void sortFracs(frac fracs[], int n);
 }
