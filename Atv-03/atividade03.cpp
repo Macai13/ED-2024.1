@@ -1,5 +1,5 @@
 #include <fstream>
-#include <iostream>
+#include <cmath>
 
 namespace aluno {
 
@@ -77,34 +77,63 @@ O conteúdo de tais arquivos segue o formato do esquema a seguir,
 
     for (int i = 0, count = 0; fileFracs[i] != '\0'; i++)
     {
-        if (fileFracs[i] >= 48 && fileFracs[i] <= 57)
+        if (!(fileFracs[i] >= 48 && fileFracs[i] <= 57))
+            continue;
+        if (count == 0)
         {
-            if (count == 0)
+            for (; fileFracs[i] >= 48 && fileFracs[i] <= 57; i++)
             {
-                file << fileFracs[i] << std::endl;
-                count++;
+                file << fileFracs[i];// TODO
             }
-            else 
-            {
-                if (count % 2 != 0)
-                {
-                    file << fileFracs[i];
-                    if (fileFracs[i + 1] >= 48 && fileFracs[i + 1] <= 57) { file << fileFracs[i + 1]; x = 10 *(fileFracs[i] - '0') + (fileFracs[i + 1] - '0'); i++; }
-                    else x = fileFracs[i] - '0';
-                    file << '\t';
-                }
-                else  
-                {
-                    file << fileFracs[i];
-                    if (fileFracs[i + 1] >= 48 && fileFracs[i + 1] <= 57) { file << fileFracs[i + 1]; y = 10 *(fileFracs[i] - '0') + (fileFracs[i + 1] - '0'); i++; }
-                    else y = fileFracs[i] - '0';
-                    file << std::endl;
-                    *(fracs + fracs_count) =  frac(x, y);
-                    fracs_count++;
-                }
-                count++;
-            }
+            file << std::endl;
+            count++;
+
+            continue;
         }
+        if (count % 2 != 0)
+        {
+            file << fileFracs[i];
+            int j, a = 0;
+            for (j = i + 1; fileFracs[j] >= 48 && fileFracs[j] <= 57; j++, a++)
+            {
+                file << fileFracs[j];// TODO
+            }
+
+            x = pow(10, a) *(fileFracs[i] - '0');
+
+            while (a != 0)
+            {
+                a--;
+
+                x += pow(10, a) * (fileFracs[i + 1] - '0');
+                i++;
+            }
+
+            file << '\t';
+        }
+        else  
+        {
+            file << fileFracs[i];
+            int j, a = 0;
+            for (j = i + 1; fileFracs[j] >= 48 && fileFracs[j] <= 57; j++, a++)
+            {
+                file << fileFracs[j];// TODO
+            }
+
+            y = pow(10, a) *(fileFracs[i] - '0');
+
+            while (a != 0)
+            {
+                a--;
+
+                y += pow(10, a) * (fileFracs[i + 1] - '0');
+                i++;
+            }
+            file << std::endl;
+            *(fracs + fracs_count) =  frac(x, y);
+            fracs_count++;
+        }
+        count++;
     }
 
     file.close();
@@ -131,26 +160,24 @@ void sortFracs(frac fracs[], int n) {
     /*
        ordena vetor de drações de entrada. Note que um ponteiro do vetor real é passado como argumento. O tamanho passaso  do vetor é dado por n.   
     */
-   //frac x = fracs[0];
    int z = 0;
-    loop:
-
-   for (int i = z; i < n; i++)
-   {
-        //std::cout << z << ": " << "is " << fracs[0 + z].getNum() << "/" << fracs[0 + z].getDen() << " bigger than " << fracs[i].getNum() << "/" << fracs[i].getDen() << "? " << fracs[0 + z].operator>(fracs[i]) << std::endl;
-
-        if (fracs[0 + z].operator>(fracs[i]) && i != 0)
+    
+    while (z != n)
+    {
+        for (int i = z; i < n; i++)
         {
-            frac temp = fracs[0 + z];       
-            fracs[0 + z] = fracs[i];
-            fracs[i] = temp;
-        }        
-   }
+                //std::cout << z << ": " << "is " << fracs[0 + z].getNum() << "/" << fracs[0 + z].getDen() << " bigger than " << fracs[i].getNum() << "/" << fracs[i].getDen() << "? " << fracs[0 + z].operator>(fracs[i]) << std::endl;
 
-   z++;
+                if (fracs[0 + z].operator>(fracs[i]) && i != 0)
+                {
+                    frac temp = fracs[0 + z];       
+                    fracs[0 + z] = fracs[i];
+                    fracs[i] = temp;
+                }        
+        }
 
-   while (z != n)
-        goto loop;
+        z++;
+    }
 }
 
 }
