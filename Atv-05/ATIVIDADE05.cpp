@@ -129,7 +129,8 @@ vector<string> tokenization(string& x)
     return tokens;
 }
 
-int precedence (string i) {
+int precedence(string i) 
+{
     if (i == "^") return 3;
     else if (i == "/" || i == "*") return 2;
     else if (i == "+" || i == "-") return 1;
@@ -172,12 +173,10 @@ vector<string> to_postfix(vector<string>& tokens)
         }
     }
 
-    for (;;)
+    while (!stack.empty())
     {
         ret.push_back(stack.top());
         stack.pop();
-
-        if (stack.empty()) break;
     }
 
     return ret;
