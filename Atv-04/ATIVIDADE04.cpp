@@ -1,5 +1,5 @@
 #include <string>
-#include <iostream>
+#include <queue>
 
 // 1
 
@@ -60,7 +60,7 @@ public:
       {
          for (int j = 0; j < capacity; j++)
          {
-            if (u[i] > u[j])
+            if (u[i] < u[j])
             {
                int temp = u[i];
                u[i] = u[j];
@@ -77,16 +77,8 @@ public:
 };
 
 vetor mergeAll(vetor U[], int n) {
-   /*
-   Esta função funde os n vetores na entrada U 
-   num vetor de saída . Note que se os vetores 
-   em U são ordenados então o vetor de saída 
-   também o será. Porém mantenha em mente 
-   que as entradas em U NÃO são necessariamente 
-   ordenadas nos casos de testes.     
-   */
-
    int len = 0;
+   std::queue<int> vetores[n];
 
    for (int j = 0; j < n; j++)
    {     
@@ -99,11 +91,45 @@ vetor mergeAll(vetor U[], int n) {
    {
       for (int j = 0; j < U[i].len(); j++)
       {
-         retval.push(U[i].at(j));
+         vetores[i].push(U[i].at(j));
       }
    }
 
-   retval.sort();
+   int x, index;
+
+   for (int i = 0; i < len; i++)
+   {
+      for (int j = 0; j < n; j++)
+      {
+         if (j == 0)
+         {
+            while (vetores[j].empty())
+            {
+               j++;
+
+               if (j >= n - 1) break;
+            }
+            x = vetores[j].front();
+            index = j;
+         }
+
+         if (x > vetores[j].front()) 
+         {
+            x = vetores[j].front();
+            index = j;
+         }
+      }
+
+      while (!vetores[index].empty())
+      {
+         retval.push(x);
+         vetores[index].pop();
+
+         if (x < vetores[index].front()) break;
+
+         x = vetores[index].front();
+      }
+   }
 
    return retval; 
 }
