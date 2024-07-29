@@ -7,5 +7,10 @@ int main(void)
 
     alternativeRadixsort(array, 9, 3);
 
+    for (int i = 0; i < 9; i++)
+    {
+        std::cout << array[i] << std::endl;
+    }
+
     return 0;
 }
